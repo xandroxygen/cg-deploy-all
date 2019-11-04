@@ -4,7 +4,12 @@ module Cg
   module Deploy
     module All
       class Error < StandardError; end
-      # Your code goes here...
+      
+      class CLI
+        def self.run(options)
+          puts options
+        end
+      end
     end
   end
 end
