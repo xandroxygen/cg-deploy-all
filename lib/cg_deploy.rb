@@ -30,6 +30,9 @@ module CgDeploy
 
       puts "\n*** Matched Environments ***"
       puts envs_to_deploy
+
+      puts "\n *** Deploy Command ***"
+      puts cg.get_command("<env>", tag, user)
       
       puts "\nContinue? (y/n)"
       confirmation = gets.strip
