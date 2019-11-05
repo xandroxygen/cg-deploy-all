@@ -2,14 +2,14 @@
 
 require 'optparse'
 require 'methadone'
-require 'cg/deploy/all.rb'
+require 'cg_deploy.rb'
 
 class App
   include Methadone::Main
   include Methadone::CLILogging
 
   main do 
-   Cg::Deploy::All::CLI.run(options)
+   CgDeploy::CLI.run(options)
   end
 
   on("-u user", "--username", "username for the docker image. passes directly to cg")
@@ -17,7 +17,7 @@ class App
   on("--serial", "run deploy commands serially. defaults to parallel")
   on("-e envs", "--environments", "environment(s) to deploy to. accepts * wildcards and comma-separated values")
 
-  version Cg::Deploy::All::VERSION
+  version CgDeploy::VERSION
 
   description "Deploy a Cloudgate app to multiple envs at once"
 

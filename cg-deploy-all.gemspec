@@ -1,11 +1,11 @@
 lib = File.expand_path("lib", __dir__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require "cg/deploy/all/version"
+require "cg_deploy/version"
 
 Gem::Specification.new do |spec|
   spec.name          = "cg-deploy-all"
   spec.license       = ""
-  spec.version       = Cg::Deploy::All::VERSION
+  spec.version       = CgDeploy::VERSION
   spec.authors       = ["Xander Moffatt"]
   spec.email         = ["xmoffatt@instructure.com"]
 
