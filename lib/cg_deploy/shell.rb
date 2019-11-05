@@ -1,6 +1,6 @@
 module CgDeploy
   class Shell
-    def self.print(line, prefix)
+    def self.print(prefix, line)
       if prefix != ""
         puts prefix + ": " + line 
       else 
@@ -11,10 +11,10 @@ module CgDeploy
     def self.exec(command, prefix="")
       Open3.popen3(command) do |stdout, stderr| 
         while line=stderr.gets do 
-          self.print(line, prefix)
+          self.print(prefix, line)
         end
       end
-      self.print("complete!", prefix)
+      self.print(prefix, "complete!")
     end
   end
 end
