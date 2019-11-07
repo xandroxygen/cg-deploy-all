@@ -18,8 +18,8 @@ module CgDeploy
         base_command << " -t #{options[:tag]}"
       end
 
-      if options[:user]
-        base_command << " -u #{options[:user]}"
+      if options[:username]
+        base_command << " -u #{options[:username]}"
       end
 
       if options[:repo]

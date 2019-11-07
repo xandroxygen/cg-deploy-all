@@ -33,7 +33,7 @@ module CgDeploy
       envs_to_deploy = Envs.build_envs(config.get_environments, envs)
 
       puts pastel.green "\n*** Matched Environments ***"
-      puts pastel.yellow envs_to_deploy
+      puts pastel.yellow envs_to_deploy.join("\n")
 
       puts pastel.green "\n *** Deploy Command ***"
       puts pastel.yellow cg.get_command("<env>", options)
@@ -46,7 +46,7 @@ module CgDeploy
       else
         puts pastel.blue "...deploying"
 
-        commands = envs_to_deploy.map { |env| [ cg.get_command(env, tag, user), env ] }
+        commands = envs_to_deploy.map { |env| [ cg.get_command(env, options), env ] }
         
         if is_serial 
           commands.each { |c, env| Shell.exec(c, env) }
