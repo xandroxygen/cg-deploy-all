@@ -2,6 +2,8 @@ require 'pathname'
 require 'yaml'
 require 'thread'
 require 'tty-command'
+require 'pastel'
+
 require "cg_deploy/version"
 require "cg_deploy/checks"
 require "cg_deploy/config"
@@ -10,6 +12,7 @@ require "cg_deploy/exceptions"
 require "cg_deploy/cloudgate"
 require "cg_deploy/parallel"
 require "cg_deploy/shell"
+
 include Methadone::SH
 include Methadone::CLILogging
 
@@ -19,6 +22,7 @@ module CgDeploy
       Checks.run_all
       config = Config.new
       cg = Cloudgate.new(config.get_cg_version)
+      pastel = Pastel.new
 
 
       envs = options[:e]
@@ -28,19 +32,19 @@ module CgDeploy
 
       envs_to_deploy = Envs.build_envs(config.get_environments, envs)
 
-      puts "\n*** Matched Environments ***"
-      puts envs_to_deploy
+      puts pastel.green "\n*** Matched Environments ***"
+      puts pastel.yellow envs_to_deploy
 
-      puts "\n *** Deploy Command ***"
-      puts cg.get_command("<env>", tag, user)
+      puts pastel.green "\n *** Deploy Command ***"
+      puts pastel.yellow cg.get_command("<env>", tag, user)
       
-      puts "\nContinue? (y/n)"
+      puts pastel.green "\nContinue? (y/n)"
       confirmation = gets.strip
       if confirmation != 'y'
-        puts "...exiting without deploying"
+        puts pastel.red "...exiting without deploying"
         return
       else
-        puts "...deploying"
+        puts pastel.blue "...deploying"
 
         commands = envs_to_deploy.map { |env| [ cg.get_command(env, tag, user), env ] }
         
