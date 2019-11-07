@@ -1,20 +1,11 @@
+require_relative "printer"
+
 module CgDeploy
   class Shell
-    def self.print(prefix, line)
-      if prefix != ""
-        puts prefix + ": " + line 
-      else 
-        puts line
-      end
-    end
-
-    def self.exec(command, prefix="")
-      Open3.popen3(command) do |stdout, stderr| 
-        while line=stderr.gets do 
-          self.print(prefix, line)
-        end
-      end
-      self.print(prefix, "complete!")
+    def self.exec(command, env)
+      printer = CgDeploy::Printer.new($stdout, { env: env })
+      cmd = TTY::Command.new(color: true, pty: true, printer: printer)
+      cmd.run(command)
     end
   end
 end

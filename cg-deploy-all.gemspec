@@ -25,5 +25,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rake", "~> 10.0"
   spec.add_development_dependency('rdoc')
   spec.add_dependency('methadone', '~> 2.0.2')
+  spec.add_dependency('tty-command', '~> 0.9.0')
   spec.add_development_dependency('test-unit')
 end

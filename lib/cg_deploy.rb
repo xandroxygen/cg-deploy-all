@@ -1,7 +1,7 @@
 require 'pathname'
 require 'yaml'
 require 'thread'
-require 'open3'
+require 'tty-command'
 require "cg_deploy/version"
 require "cg_deploy/checks"
 require "cg_deploy/config"
