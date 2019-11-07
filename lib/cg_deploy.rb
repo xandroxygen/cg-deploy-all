@@ -26,9 +26,9 @@ module CgDeploy
 
 
       envs = options[:e]
+      is_serial = options[:serial]
       tag = options[:t]
       user = options[:u]
-      is_serial = options[:serial]
 
       envs_to_deploy = Envs.build_envs(config.get_environments, envs)
 
@@ -36,7 +36,7 @@ module CgDeploy
       puts pastel.yellow envs_to_deploy
 
       puts pastel.green "\n *** Deploy Command ***"
-      puts pastel.yellow cg.get_command("<env>", tag, user)
+      puts pastel.yellow cg.get_command("<env>", options)
       
       puts pastel.green "\nContinue? (y/n)"
       confirmation = gets.strip

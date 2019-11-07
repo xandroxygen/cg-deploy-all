@@ -11,15 +11,35 @@ module CgDeploy
       correct_version
     end
 
-    def get_command(env, tag, user)
+    def get_command(env, options)
       base_command = "cg _#{@cg_version}_ deploy -e #{env}"
       
-      if tag 
-        base_command << " -t #{tag}"
+      if options[:tag] 
+        base_command << " -t #{options[:tag]}"
       end
 
-      if user
-        base_command << " -u #{user}"
+      if options[:user]
+        base_command << " -u #{options[:user]}"
+      end
+
+      if options[:repo]
+        base_command << " -r #{options[:repo]}"
+      end
+
+      if options[:pool]
+        base_command << " -p #{options[:pool]}"
+      end
+
+      if !options['aws-account-check']
+        base_command << " --no-aws-account-check"
+      end
+
+      if !options['run-hooks']
+        base_command << " --no-run-hooks"
+      end
+
+      if !options['assume-deployer-role']
+        base_command << " --no-assume-deployer-role"
       end
 
       base_command

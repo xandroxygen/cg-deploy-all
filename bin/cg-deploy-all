@@ -12,10 +12,20 @@ class App
    CgDeploy::CLI.run(options)
   end
 
+  options['assume-deployer-role'] = true
+  options['run-hooks'] = true
+  options['aws-account-check'] = true
+
+  on("-e envs", "--environments", "environment(s) to deploy to. accepts * wildcards and comma-separated values")
+  on("--serial", "run deploy commands serially. defaults to parallel")
+  # the rest of these are from cg and are passed directly to it
   on("-u user", "--username", "username for the docker image. passes directly to cg")
   on("-t tag", "--tag", "tag for the docker image. defaults to the git commit id of the build context. slashes are replaced with periods. passes directly to cg")
-  on("--serial", "run deploy commands serially. defaults to parallel")
-  on("-e envs", "--environments", "environment(s) to deploy to. accepts * wildcards and comma-separated values")
+  on("-r repo", "--repo", "name of repository for the docker image. passes directly to cg")
+  on("-p pool", "--pool", "instance pool names. passes directly to cg")
+  on("--[no-]aws-account-check", "check that the aws credentials available are for the correct account. passes directly to cg (default: enabled)")
+  on("--[no-]run-hooks", "runs the pre and post deploy hooks. passes directly to cg (default: enabled)")
+  on("--[no-]assume-deployer-role", "assume the deployer role when performing deployer actions. passes directly to cg (default: enabled)")
 
   version CgDeploy::VERSION
 
