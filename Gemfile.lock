@@ -16,7 +16,7 @@ GEM
       tty-color (~> 0.5)
     power_assert (1.1.5)
     rake (10.5.0)
-    rdoc (6.2.0)
+    rdoc (6.3.2)
     test-unit (3.3.4)
       power_assert
     tty-color (0.5.0)
